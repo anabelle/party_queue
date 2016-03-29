@@ -1,10 +1,28 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "DTD/xhtml1-transitional.dtd">
-<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
-	<head>
-		<title>Party Queue</title>
-	</head>
-	<body>
-		<p>TO BE IMPLEMENTED</p>
-	</body>
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml" ng-app>
+<head>
+	<link rel="stylesheet" type="text/css" href="./stylesheets/style.css" media="screen" />
+	<script src="./angular/angular.js"></script>
+	<title>Party Queue</title>
+</head>
+<body>
+	<div id = "body_left_panel">
+		<div id = "header">
+			Party queue
+		</div>
+		<div id = "search_bar_container" ng-init = "search = {req: '', res: ''}">
+			<form id = "search_form">
+				<input class = "search_bar" type="text" ng-model = "search.req" placeholder="Search..." required>
+				<input class = "search_button" type="button" value="Search">
+			</form>
+			<div id = "search_result_container">
+				<p id = "search_string">{{search.req}}</p>
+				<ul>
+					
+				</ul>
+			</div>
+		</div>
+	</div>
+</body>
 </html>

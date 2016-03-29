@@ -18,39 +18,45 @@ searchRouter.route('/')
 .get(function(req,res,next) {
 	console.log('Query: '+ req.query.q + '\nType: '+req.query.type);
 
-	request({
-	    url: 'https://api.spotify.com/v1/search?', //URL to hit
-	    method: 'GET',
-	    qs: {q: req.query.q, type: req.query.type}
-	}, function(error, response, body){
-		if(error) {
-			console.log(error);
-			next(error);
-		} else {
-			var searchResult = JSON.parse(body);
-			console.log(searchResult);
-			console.log(body);
+	if(req.query.q !== undefined){
+		request({
+		    url: 'https://api.spotify.com/v1/search?', //URL to hit
+		    method: 'GET',
+		    qs: {q: req.query.q, type: req.query.type}
+		}, function(error, response, body){
+			if(error) {
+				console.log(error);
+				next(error);
+			} else {
+				var searchResult = JSON.parse(body);
+				console.log(searchResult);
 
-			if(searchResult.artists.items !== undefined) {
-				var listLen = searchResult.artists.items.length;
-				for (var i = 0; i < listLen; i++) {
-					res.write('name: '+ searchResult.artists.items[i].name + '<br>'
-						+'id: '+ searchResult.artists.items[i].id + '<br>'+
-						'uri: '+ searchResult.artists.items[i].uri+ '<br>'+
-						'––––––––––––––––––––––––––––––––––––––––––––––––––––'+ '<br>');
+				if(searchResult.artists !== undefined && searchResult.artists.items !== undefined) {
+					var listLen = searchResult.artists.items.length;
+					for (var i = 0; i < listLen; i++) {
+						res.write('name: '+ searchResult.artists.items[i].name + '<br>'
+							+'id: '+ searchResult.artists.items[i].id + '<br>'+
+							'uri: '+ searchResult.artists.items[i].uri+ '<br>'+
+							'––––––––––––––––––––––––––––––––––––––––––––––––––––'+ '<br>');
+					}
+					res.end('number of artists: ' + searchResult.artists.items.length);
 				}
-				res.end('number of artists: ' + searchResult.artists.items.length);
-			}
 
-			if(searchResult.albums.items !== undefined){
-				//DO STUFF
-			}
+				if(searchResult.albums !== undefined && searchResult.albums.items !== undefined){
+					//DO STUFF
+					console.log("albums");
+				}
 
-			if(searchResult.tracks.items !== undefined){
-				//DO STUFF
+				if(searchResult.tracks !== undefined && searchResult.tracks.items !== undefined){
+					//DO STUFF
+					console.log("tracks");
+				}
+
+				res.end("shitty search string!");
+
 			}
-		}
-	});
+		});
+	}
 	//res.end('Looking for shiiet like: '+ req.query.q + '<br>with type: '+req.query.type);
 })
 
