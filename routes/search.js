@@ -11,7 +11,11 @@ searchRouter.use(bodyParser.json());
 searchRouter.route('/')
 
 .all(function(req,res,next) {
-	res.writeHead(200, { 'Content-Type': 'text/plain' });
+	res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
+	res.contentType('application/json');
+	//res.writeHead(200, { 'Content-Type': 'text/plain' });
 	next();
 })
 
@@ -29,17 +33,18 @@ searchRouter.route('/')
 				next(error);
 			} else {
 				var searchResult = JSON.parse(body);
-				console.log(searchResult);
-
+				
 				if(searchResult.artists !== undefined && searchResult.artists.items !== undefined) {
 					var listLen = searchResult.artists.items.length;
-					for (var i = 0; i < listLen; i++) {
+					/*for (var i = 0; i < listLen; i++) {
 						res.write('name: '+ searchResult.artists.items[i].name + '<br>'
 							+'id: '+ searchResult.artists.items[i].id + '<br>'+
 							'uri: '+ searchResult.artists.items[i].uri+ '<br>'+
 							'––––––––––––––––––––––––––––––––––––––––––––––––––––'+ '<br>');
-					}
-					res.end('number of artists: ' + searchResult.artists.items.length);
+					}*/
+					console.log(JSON.stringify(searchResult.artists.items));
+					res.end(JSON.stringify(searchResult.artists.items));
+					console.log('number of artists: ' + searchResult.artists.items.length);
 				}
 
 				if(searchResult.albums !== undefined && searchResult.albums.items !== undefined){

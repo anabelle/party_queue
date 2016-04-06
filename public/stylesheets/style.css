@@ -13,13 +13,8 @@ body {
     background-color: white;
     height: 26px;
     font-size: 15px; }
-  body #search_form .search_button {
-    border: 3px solid #FF9595;
-    background-color: #FF9595;
-    color: white;
-    height: 23px;
-    box-sizing: initial;
-    font-size: 15px; }
+  body .result_list .result_item {
+    list-style: none; }
   body a {
     color: black; }
 

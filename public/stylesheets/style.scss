@@ -19,14 +19,11 @@ body {
     		height: 26px;
     		font-size: 15px;
 		}
+	}
 
-		.search_button  {
-    		border: 3px solid #FF9595;
-    		background-color: #FF9595;
-    		color: white;
-    		height: 23px;
-    		box-sizing: initial;
-    		font-size: 15px;
+	.result_list {
+		.result_item {
+			list-style: none;
 		}
 	}
 

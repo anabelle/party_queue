@@ -14,13 +14,13 @@
 		</div>
 		<div id = "search_bar_container" ng-controller="searchController as searchCtrl">
 			<form id = "search_form">
-				<input class = "search_bar" type="text" ng-model = "searchCtrl.req" placeholder="Search..." required>
-				<input class = "search_button" type="button" value="Search">
+				<input class = "search_bar" type="text" ng-model-options="{ debounce: 800 }" ng-model = "request"placeholder="Search..." required>
+
 			</form>
 			<div id = "search_result_container">
-				<p id = "search_string">{{searchCtrl.req}}</p>
-				<ul>
-					{{searchCtrl.res}}
+				<p id = "search_string">{{request}}</p>
+				<ul class = "result_list">
+					<li class = "result_item" ng-repeat = "item in response">{{item.name}}</li>
 				</ul>
 			</div>
 		</div>
